@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 
+// Spring boot @Controller:html文書をそのまま返すアノテーション
 @Controller
 public class HomeController {
     @RequestMapping(value = "/hello")
-    @ResponseBody
+    @ResponseBody // 戻り値のStringオブジェクト自体がレスポンス本体として扱われる
     String hello() {
         return """
                 <html>
@@ -18,7 +19,7 @@ public class HomeController {
                         <h1>Hello</h1>
                         It Works!<br>
                         現在時刻は%sです。
-                    </body> 
+                    </body>
                 </html>
                         """.formatted(LocalDateTime.now());
     }
