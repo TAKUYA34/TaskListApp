@@ -32,6 +32,7 @@
                     </tr>
                 </thead>
 
+                <!-- ${taskList}の部分が、taskItemsをHTMLテンプレートに渡すためのキー -->
                 <tbody>
                     <tr th:each="task:${taskList}">
                         <td class="hidden" th:text="${task.id}"></td>
