@@ -12,8 +12,11 @@ import java.util.Map;
 
 @Service
 public class TaskListDao {
+    // JdbcTemplate：DBを活用するための様々な機能を提供する
     private final JdbcTemplate jdbcTemplate;
 
+    // @Autowired：Spring BootはTaskListDaoクラスのコンストラクタを呼び出す際に引数として適切なオブジェクトを作成して渡す
+    // Springが持っている仕組みをDI(Dependency Injection：依存性の注入)という
     @Autowired
     TaskListDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
