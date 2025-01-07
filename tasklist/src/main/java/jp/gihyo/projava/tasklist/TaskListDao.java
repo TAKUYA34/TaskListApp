@@ -22,6 +22,9 @@ public class TaskListDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    // SimpleJdbcInsert：テーブルへのデータ追加を行う
+    // BeanPropertySqlParameterSource()：SqlParameterSourceの実装クラス。引数に設定したオブジェクトに対して、テーブルに追加したいデータを表すクラスのオブジェクトを渡す。
+    // SimpleJdbcInsert().withTableName()：データを追加する対象のDB名を設定する
     public void add(HomeController.TaskItem taskItem) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(taskItem);
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
