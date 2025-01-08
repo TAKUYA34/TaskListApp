@@ -1,5 +1,7 @@
 package jp.gihyo.projava.tasklist;
 
+import jp.gihyo.projava.tasklist.HomeController.TaskItem;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -25,19 +27,19 @@ public class TaskListDao {
     // SimpleJdbcInsert：テーブルへのデータ追加を行う
     // BeanPropertySqlParameterSource()：SqlParameterSourceの実装クラス。引数に設定したオブジェクトに対して、テーブルに追加したいデータを表すクラスのオブジェクトを渡す。
     // SimpleJdbcInsert().withTableName()：データを追加する対象のDB名を設定する
-    public void add(HomeController.TaskItem taskItem) {
+    public void add(TaskItem taskItem) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(taskItem);
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("tasklist");
         insert.execute(param);
     }
 
-    public List<HomeController.TaskItem> findAll() {
+    public List<TaskItem> findAll() {
         String query = "SELECT * FROM tasklist";
 
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
-        List<HomeController.TaskItem> taskItems = result.stream()
-                .map((Map<String, Object> row) -> new HomeController.TaskItem(
+        List<TaskItem> taskItems = result.stream()
+                .map((Map<String, Object> row) -> new TaskItem(
                                 row.get("id").toString(),
                                 row.get("task").toString(),
                                 row.get("deadline").toString(),
